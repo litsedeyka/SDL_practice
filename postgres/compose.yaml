@@ -1,0 +1,22 @@
+# Use postgres/example user/password credentials
+
+services:
+
+  db:
+    image: sdl/postgres:ru
+    restart: always
+    # set shared memory limit when using docker compose
+    shm_size: 512mb
+    # or set shared memory limit when deploy via swarm stack
+    volumes:
+      - ./pg_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: exPSSWRD 
+    ports:
+      - 5432:5432
+
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
